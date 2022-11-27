@@ -1,7 +1,7 @@
 import React from "react";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-import texture from "../assets/propic.jpg";
+// import texture from "../assets/propic.jpg";
 // import { FontLoader } from "three/src/loaders/FontLoader";
 // import {Text}
 import boldUrl from "../fonts/firstFont.txt";
@@ -17,7 +17,7 @@ import {
 } from "@react-three/drei";
 
 const AnimatedSphere = (props) => {
-  const profilePic = useLoader(TextureLoader, texture);
+  // const profilePic = useLoader(TextureLoader, texture);
   useFrame((state, delta) => (ref.current.rotation.y += 0.01));
   const ref = useRef();
 
