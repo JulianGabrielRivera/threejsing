@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 100vh;
 }
 
 .App-logo {
@@ -35,4 +36,23 @@
   to {
     transform: rotate(360deg);
   }
+}
+.canvas {
+  background: black;
+}
+.skills {
+  display: flex;
+}
+nav {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  z-index: 20;
+  width: 100vh;
+  font-weight: bold;
+  color: white;
+}
+nav li {
+  list-style: none;
 }
