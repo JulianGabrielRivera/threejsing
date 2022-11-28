@@ -26,3 +26,8 @@ nav li {
   background: black;
   position: absolute;
 }
+.canvas2 {
+  background: purple;
+  position: absolute;
+  display: none;
+}
