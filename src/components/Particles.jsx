@@ -1,18 +1,21 @@
 import { PointMaterial } from "@react-three/drei";
 import modelPath from "../assets/circle.png";
 import { useLoader } from "@react-three/fiber";
-import { TextureLoader } from "three";
+import { Clock, TextureLoader } from "three";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState, useMemo } from "react";
-import { Text } from "@react-three/drei";
+import { Text, Center, OrbitControls, Cloud } from "@react-three/drei";
 const Particles = () => {
   const rainDrop = useLoader(TextureLoader, modelPath);
 
-  const particlesCount = 1000;
+  const particlesCount = 2200;
 
   const posArray = new Float32Array(particlesCount * 3);
   //   xyz xyz xyz, diff vertices.
-  useFrame((state, delta) => (ref.current.rotation.y += 0.02));
+  useFrame((state, delta) => {
+    ref.current.rotation.y += 0.005;
+    ref.current.rotation.x -= 0.005;
+  });
   const ref = useRef();
   let mouseX = 0;
   let mouseY = 0;
@@ -46,47 +49,48 @@ const Particles = () => {
   }, []);
 
   return (
-    <group
-      onMouseHover={(e) => {
-        // onMouseOver();
-        console.log(e);
-        handleMouseEnter();
-        // console.log(e);
-        // ref.current.rotation.y += 0.01;
+    // <group
+    //   onMouseHover={(e) => {
+    //     // onMouseOver();
+    //     console.log(e);
+    //     handleMouseEnter();
+    //     // console.log(e);
+    //     // ref.current.rotation.y += 0.01;
+    //   }}
+    //   style={{ width: "100vw" }}
+    // >
+    <mesh
+      ref={ref}
+      onPointerOver={() => {
+        ref.current.rotation.y -= mouseY * 0.0000009;
+
+        ref.current.rotation.x -= mouseX * 0.0000009;
       }}
     >
-      <mesh
-        ref={ref}
-        onPointerOver={() => {
-          ref.current.rotation.x += mouseX * 0.000003;
-          //   ref.current.rotation.y += mouseY * 0.000003;
-        }}
-      >
-        <points>
-          <bufferGeometry>
-            <bufferAttribute
-              attach="attributes-position"
-              array={posArray}
-              count={posArray.length / 3}
-              itemSize={3}
-            />
-          </bufferGeometry>
+      <points>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            array={posArray}
+            count={posArray.length / 3}
+            itemSize={3}
+          />
+        </bufferGeometry>
 
-          <PointMaterial
-            attach="material"
-            size={0.05}
-            color={"blue"}
-            transparent={true}
-            map={rainDrop}
-            alphaTest={0.5} //merupakan thresshold saat rendering untuk mencega bila opacity dibawah value alphatest
-            opacity={0.8}
-            scale={4}
-            //   sizeAttenuation={true}
-          ></PointMaterial>
-        </points>
-        <Text>Googie</Text>
-      </mesh>
-    </group>
+        <PointMaterial
+          attach="material"
+          size={0.02}
+          color={"white"}
+          transparent={true}
+          map={rainDrop}
+          alphaTest={0.5} //merupakan thresshold saat rendering untuk mencega bila opacity dibawah value alphatest
+          opacity={0.8}
+          scale={4}
+          // sizeAttenuation={true}
+        ></PointMaterial>
+      </points>
+    </mesh>
+    // </group>
   );
 };
 export default Particles;

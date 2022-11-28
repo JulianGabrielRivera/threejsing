@@ -40,7 +40,7 @@ const Box = () => {
               aspect={1 / 1}
               position={[0, 0, 5]}
             /> */}
-            <color attach="background" args={["purple"]} />
+            <color attach="background" args={["white"]} />
 
             <ambientLight intensity={0.2} />
             <directionalLight position={[10, 10, 5]} />

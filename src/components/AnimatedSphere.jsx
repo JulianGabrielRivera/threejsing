@@ -44,7 +44,7 @@ const AnimatedSphere = (props) => {
       <mesh ref={ref}>
         <Text3D font={boldUrl} scale={1} className="font">
           {props.name}
-          <meshStandardMaterial color="black" />
+          <meshStandardMaterial color="white" />
         </Text3D>
       </mesh>
     </>
