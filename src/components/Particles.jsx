@@ -9,7 +9,7 @@ import { Text, Center, OrbitControls, Cloud } from "@react-three/drei";
 const Particles = () => {
   const rainDrop = useLoader(TextureLoader, modelPath);
 
-  const particlesCount = 1500;
+  const particlesCount = 2500;
 
   const posArray = new Float32Array(particlesCount * 3);
   //   xyz xyz xyz, diff vertices.
@@ -70,7 +70,6 @@ const Particles = () => {
 
         ref.current.rotation.x -= mouseX * 0.0000009;
       }}
-     
     >
       <points>
         <bufferGeometry>
@@ -84,7 +83,7 @@ const Particles = () => {
 
         <PointMaterial
           attach="material"
-          size={0.02}
+          size={0.01}
           color={"white"}
           transparent={false}
           map={rainDrop}

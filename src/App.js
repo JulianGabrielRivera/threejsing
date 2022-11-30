@@ -19,6 +19,8 @@ import { useLoader, useThree } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import Particles from "./components/Particles";
 import { useFrame } from "@react-three/fiber";
+import { gsap, Power3 } from "gsap";
+import Image from "./components/Image";
 
 function Resizer() {
   const { size } = useThree();
@@ -29,46 +31,61 @@ function App() {
   const handleMouseEnter = (e) => {
     console.log("mouse entered");
   };
+  const height = window.outerHeight + window.innerHeight;
   const [cam, setCam] = useState(false);
   // useFrame((state, delta) => (ref.current.rotation.y += 0.02));
   const ref = useRef();
   return (
-    <div
-      style={{ width: "100vw", height: "100vh" }}
-      onClick={() => {
-        setCam(!cam);
-      }}
-    >
-      <nav>
-        <li>About</li>
-      </nav>
-      {cam && (
-        <Canvas className="canvas" camera={{ fov: 35, far: 100 }}>
+    <div>
+      <div
+        style={{ width: "100vw", height: height, display: "relative" }}
+        onClick={() => {
+          setCam(!cam);
+        }}
+      >
+        <nav>
+          <li>Home</li>
+          <li>Projects</li>
+          <li>About</li>
+        </nav>
+        <h1>Julian Gabriel Rivera</h1>
+        {cam && (
+          <Canvas
+            // className="canvas"
+            camera={{ fov: 60, far: 100 }}
+            style={{ height: height, background: "black" }}
+          >
+            <Resizer />
+            <Particles />
+
+            {/* <Testing /> */}
+            {/* <Box color="pink" metalness={0} /> */}
+            {/* <Text scale={0.5}>React</Text>
+            <Center top left>
+              <Text scale={0.5}>CSS</Text>
+            </Center> */}
+          </Canvas>
+        )}
+
+        <Canvas
+          className={cam ? "canvas2" : "canvas"}
+          camera={{ fov: 165, far: 100 }}
+        >
           <Resizer />
           <Particles />
+
           {/* <Testing /> */}
           {/* <Box color="pink" metalness={0} /> */}
-          <Text scale={0.5}>React</Text>
+          {/* <Text scale={0.5}>React</Text>
           <Center top left>
             <Text scale={0.5}>CSS</Text>
-          </Center>
+          </Center> */}
         </Canvas>
-      )}
-
-      <Canvas
-        className={cam ? "canvas2" : "canvas"}
-        camera={{ fov: 120, far: 100 }}
-      >
-        <Resizer />
-        <Particles />
-
-        {/* <Testing /> */}
-        {/* <Box color="pink" metalness={0} /> */}
-        <Text scale={0.5}>React</Text>
-        <Center top left>
-          <Text scale={0.5}>CSS</Text>
-        </Center>
-      </Canvas>
+        <Image />
+      </div>
+      {/* <div>
+        <Image />
+      </div> */}
     </div>
   );
 }
