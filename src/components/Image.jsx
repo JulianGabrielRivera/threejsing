@@ -1,6 +1,7 @@
 import { gsap, Power3 } from "gsap";
 import { useRef, useEffect } from "react";
-const Image = () => {
+const Image = ({ state }) => {
+  console.log(state);
   let tl = new gsap.timeline();
   let ease = Power3.easeIn();
 
@@ -17,17 +18,19 @@ const Image = () => {
     //   ease: ease,
     // });
     tl.to(img, 1.2, {
-      x: 350,
+      x: 850,
+      y: 100,
       ease: ease,
       opacity: 0.5,
     });
     tl.to(img2, 1.2, {
-      x: -430,
+      x: -900,
+      y: 650,
       ease: ease,
       opacity: 0.5,
     });
     tl.to(img3, 1.2, {
-      y: 900,
+      y: 1250,
       x: -900,
       ease: ease,
       opacity: 0.5,
@@ -38,13 +41,20 @@ const Image = () => {
     //   opacity: 0.5,
     // });
   });
+
   return (
     <>
-      <div style={{ background: "black" }}>
-        <div ref={(el) => (img = el)} className="ivar"></div>
-        <div ref={(el) => (img2 = el)} className="fitnessa"></div>
-        <div ref={(el) => (img3 = el)} className="numinous"></div>
-      </div>
+      {/* <div style={{ background: "black", height: "100%", color: "white" }}> */}
+      {state && (
+        <>
+          <div ref={(el) => (img = el)} className="ivar">
+            <h1>Space Between</h1>
+          </div>
+          <div ref={(el) => (img2 = el)} className="fitnessa"></div>
+          <div ref={(el) => (img3 = el)} className="numinous"></div>
+        </>
+      )}
+      {/* </div> */}
     </>
   );
 };

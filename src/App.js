@@ -31,24 +31,41 @@ function App() {
   const handleMouseEnter = (e) => {
     console.log("mouse entered");
   };
-  const height = window.outerHeight + window.innerHeight;
+  const height = window.screen.availHeight + window.screen.height;
   const [cam, setCam] = useState(false);
+  const [cam2, setCam2] = useState(true);
+  console.log(window);
+
   // useFrame((state, delta) => (ref.current.rotation.y += 0.02));
   const ref = useRef();
+  const [countDown, setCountDown] = useState(0);
+  // const clear = function () {
+  //   setInterval(() => {
+  //     setCountDown(countDown + 1);
+  //   }, 1000);
+  // };
+  // clear();
+  // if (countDown > 9) {
+  //   clearInterval(clear);
+  //   setCam(!cam);
+  // }
   return (
-    <div>
+    <div style={{ width: "100vw", height: height, display: "relative" }}>
       <div
-        style={{ width: "100vw", height: height, display: "relative" }}
         onClick={() => {
           setCam(!cam);
         }}
       >
-        <nav>
-          <li>Home</li>
-          <li>Projects</li>
-          <li>About</li>
-        </nav>
-        <h1>Julian Gabriel Rivera</h1>
+        {cam && (
+          <nav>
+            <li>Home</li>
+            <li>Projects</li>
+            <li>About</li>
+          </nav>
+        )}
+
+        {/* <h1>Julian Gabriel Rivera</h1> */}
+
         {cam && (
           <Canvas
             // className="canvas"
@@ -66,22 +83,36 @@ function App() {
             </Center> */}
           </Canvas>
         )}
+        {/* <h1>Julian Gabriel Rivera</h1> */}
+        {/* <h3>A Full Stack Web Developer</h3> */}
 
         <Canvas
           className={cam ? "canvas2" : "canvas"}
-          camera={{ fov: 165, far: 100 }}
+          camera={{ fov: 120 }}
+          style={{ height: height, background: "black" }}
         >
           <Resizer />
-          <Particles />
+          {/* <Particles /> */}
 
-          {/* <Testing /> */}
+          <Text fontSize={0.3} color={"white"} position={[-3, 5.5, 1]}>
+            Julian Gabriel Rivera
+          </Text>
+
+          <Testing />
+          <Text fontSize={0.2} position={[3, 1, 1]}>
+            A Full Stack Web Developer
+          </Text>
+          <Text fontSize={0.2} position={[0, 3.1, 1]}>
+            Teleport here
+          </Text>
+
           {/* <Box color="pink" metalness={0} /> */}
           {/* <Text scale={0.5}>React</Text>
           <Center top left>
             <Text scale={0.5}>CSS</Text>
           </Center> */}
         </Canvas>
-        <Image />
+        <Image state={cam} />
       </div>
       {/* <div>
         <Image />

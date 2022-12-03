@@ -7,6 +7,8 @@ import { useLoader } from "@react-three/fiber";
 import { PointMaterial, Points, Text, RenderTexture } from "@react-three/drei";
 import { Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import { Text3D } from "@react-three/drei";
+import { Center } from "@react-three/drei";
 export default function Testing() {
   const rainDrop = useLoader(TextureLoader, modelPath);
   useFrame((state, delta) => (ref.current.rotation.y += 0.02));
@@ -31,7 +33,7 @@ export default function Testing() {
   //     return new Float32Array(positions);
   //   }, [count, sep]);
   return (
-    <mesh>
+    <mesh rotation={[35, 90, 30]} position={[0, 3.8, 0]}>
       <points rotation={[30, 30, 0]} ref={ref}>
         {/* <Plane attach="geometry">
         <bufferAttribute
@@ -44,6 +46,7 @@ export default function Testing() {
       </Plane> */}
 
         <sphereGeometry />
+
         <PointMaterial
           attach="material"
           map={rainDrop}
@@ -52,11 +55,12 @@ export default function Testing() {
           color={"white"}
           sizeAttenuation
           transparent={true}
-          alphaTest={0.5}
+          alphaTest={0.2}
           opacity={1.0}
-          size={0.02}
+          size={0.01}
           //   count={positions.length / 3}
           itemSize={2}
+
           //   depthWrite={false}
         >
           {/* <RenderTexture attach="map" anisotropy={16}>
